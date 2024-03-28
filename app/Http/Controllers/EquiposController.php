@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\equipos;
+use App\Models\Equipos;
 use Illuminate\Http\Request;
 
 class EquiposController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Devuelve todos los equipos contenidos en la tabla
      */
     public function index()
     {
@@ -17,34 +17,34 @@ class EquiposController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Devuelve el equipo especificado por su ID
      */
-    public function store(Request $request)
+    public function getNameById($id)
     {
-        //
+        $equipo = Equipos::find($id);
+
+        if ($equipo) {
+            return response()->json($equipo);
+        } else {
+            return response()->json(['mensaje' => 'Equipo no encontrado'], 404);
+        }
     }
 
     /**
-     * Display the specified resource.
+     * Devuelve el ID del equipo especificado por su nombre
      */
-    public function show(equipos $equipos)
+    public function getIdByName($nombre)
     {
-        //
-    }
+        // Busca el equipo por su nombre en la base de datos
+        $equipo = Equipos::where('nombre', $nombre)->first();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, equipos $equipos)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(equipos $equipos)
-    {
-        //
+        // Verifica si se encontró el equipo
+        if ($equipo) {
+            // Si se encontró, devuelve el ID del equipo
+            return response()->json(['id_equipo' => $equipo->id_equipo]);
+        } else {
+            // Si no se encontró el equipo, devuelve una respuesta con un código de estado 404 (no encontrado)
+            return response()->json(['mensaje' => 'Equipo no encontrado'], 404);
+        }
     }
 }
