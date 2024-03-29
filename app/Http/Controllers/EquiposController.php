@@ -59,7 +59,9 @@ class EquiposController extends Controller
      * api/equipos
      * Body associated:
      * {
-     *    "nombre": "nombre_equipo_a_insertar"
+     *    "nombre": "nombre_equipo_a_insertar
+     * 
+     * "
      * }   
      */
     public function store(Request $request)
@@ -93,4 +95,27 @@ class EquiposController extends Controller
         return response()->json(['message' => 'Equipo "' . $equipo->nombre . '" eliminado correctamente'], 200);
 
     }
+
+    
+    /**
+     * Actualizar el nombre de un equipo.
+     * api/equipos/{id}
+     */
+    public function update(Request $request, Equipos $equipos)
+    {
+        // Validar los datos de la solicitud
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+        ]);
+    
+        // Actualizar el nombre del equipo con el valor proporcionado en la solicitud
+        $equipos->nombre = $request->nombre;
+    
+        // Guardar los cambios en la base de datos
+        $equipos->save();
+    
+        // Devolver una respuesta exitosa
+        return response()->json(['message' => 'Nombre del equipo actualizado correctamente'], 200);
+    }
+    
 }
