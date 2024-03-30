@@ -60,8 +60,6 @@ class EquiposController extends Controller
      * Body associated:
      * {
      *    "nombre": "nombre_equipo_a_insertar
-     * 
-     * "
      * }   
      */
     public function store(Request $request)
@@ -100,6 +98,9 @@ class EquiposController extends Controller
     /**
      * Actualizar el nombre de un equipo.
      * api/equipos/{id}
+     * {
+     *    "nombre": "nombre_equipo_actualizado
+     * } 
      */
     public function update(Request $request, Equipos $equipos)
     {

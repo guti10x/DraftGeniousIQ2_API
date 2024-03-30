@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class EstadisticasEquiposController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Devuelve todos las estadísticas de todos los equipos contenidos en la tabla
+     * api/estadisticas-equipos
      */
     public function index()
     {
@@ -16,35 +17,45 @@ class EstadisticasEquiposController extends Controller
         return response()->json($estadisticasEquipos);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
-     * Display the specified resource.
+     * Mostrar estadisticas asociadas a un equipo por su ID
+     * api/estadisticas-equipos/{id_equipo}/stats
      */
-    public function show(EstadisticasEquipos $estadisticasEquipos)
+    public function getStatsById($id_equipo)
     {
-        //
+        // Buscar todas las estadísticas del equipo por su ID
+        $estadisticasEquipos = EstadisticasEquipos::where('id_equipo', $id_equipo)->get();
+    
+        // Verificar si se encontraron estadísticas para ese equipo
+        if ($estadisticasEquipos->isEmpty()) {
+            // Devolver un mensaje de error si no se encontraron estadísticas para ese equipo
+            return response()->json(['mensaje' => 'No se encontraron estadísticas para el equipo con el ID proporcionado'], 404);
+        }
+    
+        // Devolver las estadísticas del equipo como respuesta
+        return response()->json($estadisticasEquipos, 200);
     }
+    
+
 
     /**
-     * Update the specified resource in storage.
+     * Mostrar la última estadisticas asociadas a un equipo por su ID
+     * api/estadisticas-equipos/{id_equipo}/last-stats
      */
-    public function update(Request $request, EstadisticasEquipos $estadisticasEquipos)
+    public function getLastStatsById($id_equipo)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(EstadisticasEquipos $estadisticasEquipos)
-    {
-        //
+        // Buscar las estadísticas del equipo por su ID, ordenadas por fecha de actualización descendente
+        $lastStats = EstadisticasEquipos::where('id_equipo', $id_equipo)
+                                        ->orderBy('updated_at', 'desc')
+                                        ->first();
+    
+        if ($lastStats) {
+            // Devolver las estadísticas del equipo si se encuentran
+            return response()->json($lastStats, 200);
+        } else {
+            // Devolver un mensaje de error si no se encuentran estadísticas para ese equipo
+            return response()->json(['mensaje' => 'No se encontraron estadísticas para el equipo con el ID proporcionado'], 404);
+        }
     }
 }
