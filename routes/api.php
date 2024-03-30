@@ -23,7 +23,13 @@ Route::get('/estadisticas-equipos', [EstadisticasEquiposController::class, 'inde
 Route::get('/estadisticas-equipos/{id}/stats', [EstadisticasEquiposController::class, 'getStatsById']); //Obtener TODAS las estadísticas asociadas a un ID de un equipo
 Route::get('/estadisticas-equipos/{id}/last-stats', [EstadisticasEquiposController::class, 'getLastStatsById']); //Obtener ÚLTIMA estadística asociada a un ID de un equipo
 Route::post('/estadisticas-equipos', [EstadisticasEquiposController::class, 'store']); // Crear una nueva estadítica asociada un equipo
-Route::delete('/estadisticas-equipos/{id_equipo}/all', [EstadisticasEquiposController::class, 'destroyAllStatsByTeamId']); // Ruta para eliminar todas las estadísticas asociadas a un equipo por su ID
+Route::put('/estadisticas-equipos/{id}', [EstadisticasEquiposController::class, 'update']); //Actualizar el valor de todas las estadísticas de un equipo
+Route::put('/estadisticas-equipos/{id}/id-equipo', [EstadisticasEquiposController::class, 'updateIdEquipo']); // Actualizar id_equipo asociado a una estadística de un equipo
+Route::put('/estadisticas-equipos/{id}/puntos', [EstadisticasEquiposController::class, 'updatePuntos']); // Actualizar puntos obtenidos en una jornada un equipo
+Route::put('/estadisticas-equipos/{id}/media-puntos-jornada', [EstadisticasEquiposController::class, 'updateMediaPuntosJornada']); // Actualizar media de puntos de un equipo
+Route::put('/estadisticas-equipos/{id}/valor', [EstadisticasEquiposController::class, 'updateValor']); // Actualizar valor de un equipo
+Route::put('/estadisticas-equipos/{id}/num-jugadores', [EstadisticasEquiposController::class, 'updateNumJugadores']); // Actualizar número de jugadores de un equipo
+Route::delete('/estadisticas-equipos/{id_equipo}/all', [EstadisticasEquiposController::class, 'destroyAllStatsByTeamId']); // Eliminar todas las estadísticas asociadas a un equipo por su ID
 
 #EQUIPOS - ESTADíSTICAS_EQUIPOS:
 Route::get('/equipos/{equipo}/estadisticas', [EstadisticasEquiposController::class, 'index']); //Obtener TODAS las estadísticas asociadas a un equipo por su id
