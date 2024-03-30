@@ -12,4 +12,9 @@ class equipos extends Model
     protected $table = 'equipos';
     protected $primaryKey = 'id_equipo'; // Especifica el nombre de la columna de la clave primaria
     protected $fillable = ['nombre'];
+
+    public function estadisticasEquipos()
+    {
+        return $this->hasMany(EstadisticasEquipos::class);
+    }
 }
