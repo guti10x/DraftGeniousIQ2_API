@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\EstadisticasEquiposController;
+use App\Http\Controllers\JugadoresController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -31,5 +32,13 @@ Route::put('/estadisticas-equipos/{id}/valor', [EstadisticasEquiposController::c
 Route::put('/estadisticas-equipos/{id}/num-jugadores', [EstadisticasEquiposController::class, 'updateNumJugadores']); // Actualizar número de jugadores de un equipo
 Route::delete('/estadisticas-equipos/{id_equipo}/all', [EstadisticasEquiposController::class, 'destroyAllStatsByTeamId']); // Eliminar todas las estadísticas asociadas a un equipo por su ID
 
-#EQUIPOS - ESTADíSTICAS_EQUIPOS:
+#EQUIPOS - ESTADÍSTICAS_EQUIPOS:
 Route::get('/equipos/{equipo}/estadisticas', [EstadisticasEquiposController::class, 'index']); //Obtener TODAS las estadísticas asociadas a un equipo por su id
+Route::get('/equipos/{equipo}/estadisticas/last-stats', [EstadisticasEquiposController::class, 'getLastStatsById']); //Obtener la ÚLTIMA estadística asociada a un equipo por su id
+
+
+#JUGADORES
+Route::get('/jugadores', [JugadoresController::class, 'index']); //Obtener todas las estadísticas globales de un jugador
+Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']);
+Route::get('/jugadores/{id}/edad-altura-peso', [JugadoresController::class, 'getEdadAlturaPeso']);
+

@@ -9,7 +9,7 @@ class EstadisticasEquiposController extends Controller
 {
     /**
      * Devuelve todos las estadísticas de todos los equipos contenidos en la tabla
-     * api/estadisticas-equipos
+     * GET api/estadisticas-equipos
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class EstadisticasEquiposController extends Controller
 
     /**
      * Mostrar estadisticas asociadas a un equipo por su ID
-     * api/estadisticas-equipos/{id_equipo}/stats
+     * GET api/estadisticas-equipos/{id_equipo}/stats
      */
     public function getStatsById($id_equipo)
     {
@@ -40,7 +40,7 @@ class EstadisticasEquiposController extends Controller
 
     /**
      * Mostrar la última estadisticas asociadas a un equipo por su ID
-     * api/estadisticas-equipos/{id_equipo}/last-stats
+     * GET api/estadisticas-equipos/{id_equipo}/last-stats
      */
     public function getLastStatsById($id_equipo)
     {
@@ -61,7 +61,7 @@ class EstadisticasEquiposController extends Controller
 
     /**
      * Crea nuevas estadísticas asociadas a un equipo utilizando los datos recibidos en la petición
-     * /api/estadisticas-equipos
+     * POST /api/estadisticas-equipos
      * {
      *   "id_equipo": id_del_equipo_al_que_le_pertenecen_las_estadisticas_a_continuación,
      *   "puntos": puntos_totales_obtenidos_del_equipo,
@@ -92,7 +92,7 @@ class EstadisticasEquiposController extends Controller
 
      /**
      * Actualizar TODAS las estadisticas asociadas a un equipo por su ID de estadística.
-     * api/estadisticas-equipos/{id}
+     * PUT api/estadisticas-equipos/{id}
      * {
      *   "id_equipo": id_del_nuevo_equipo_al_que_le_pertenecen_las_estadisticas_a_continuación,
      *   "puntos": nuevos_puntos_totales_obtenidos_del_equipo,
@@ -134,7 +134,7 @@ class EstadisticasEquiposController extends Controller
     }
 
     /* Función para actualizar el id_equipo asociado a las estadísticas
-     *  api/estadisticas-equipos/{id}/id-equipo
+     *  PUT api/estadisticas-equipos/{id}/id-equipo
      *  {
      *   "id_equipo": id_del_nuevo_equipo_al_que_le_pertenecen_las_estadisticas_a_continuación
      *  }
@@ -163,7 +163,7 @@ class EstadisticasEquiposController extends Controller
     }
 
     /* Función para actualizar los puntos del equipo
-    *  api/estadisticas-equipos/{id}/puntos'
+    *  PUT api/estadisticas-equipos/{id}/puntos'
     *  {
     *   "puntos": nuevos_puntos_totales_obtenidos_del_equipo
     *  }
@@ -192,7 +192,7 @@ class EstadisticasEquiposController extends Controller
     }
 
     /* Función para actualizar la media de puntos por jornada
-     * api/estadisticas-equipos/{id}/media-puntos-jornada
+     * PUTapi/estadisticas-equipos/{id}/media-puntos-jornada
      * {
      *   "media-puntos-jornada": uemedia_puntos_obtenidos_por_jornada,
      *  }
@@ -221,7 +221,7 @@ class EstadisticasEquiposController extends Controller
     }
 
     /* Función para actualizar el valor del equipo
-    *  api/estadisticas-equipos/{id}/valor'
+    *  PUT api/estadisticas-equipos/{id}/valor'
     *  {
     *   "puntos": nuevos_puntos_totales_obtenidos_del_equipo
     *  }
@@ -250,7 +250,7 @@ class EstadisticasEquiposController extends Controller
     }
 
     /* Función para actualizar el número de jugadores
-    *  api/estadisticas-equipos/{id}/num-jugadores
+    *  PUT api/estadisticas-equipos/{id}/num-jugadores
     * {
     *   "num-jugadores": número_jugaodres_que_tiene_el_equipo
     *  }
@@ -281,7 +281,7 @@ class EstadisticasEquiposController extends Controller
 
      /**
      * Eliminar TODAS las estadisticas asociadas a un equipo por su ID.
-     * api/estadisticas-equipos/{id}
+     * DELETE api/estadisticas-equipos/{id}
      */
     public function destroyAllStatsByTeamId($id_equipo)
     {

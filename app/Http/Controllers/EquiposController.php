@@ -9,7 +9,7 @@ class EquiposController extends Controller
 {
     /**
      * Devuelve todos los equipos contenidos en la tabla
-     * api/equipos
+     * GET api/equipos
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class EquiposController extends Controller
 
     /**
      * Devuelve el equipo especificado por su ID
-     * api/equipos/{equipo}
+     * GET api/equipos/{equipo}
      */
     public function getNameById($id)
     {
@@ -36,7 +36,7 @@ class EquiposController extends Controller
 
     /**
      * Devuelve el ID del equipo especificado por su nombre
-     * api/equipos/id/{nombre}
+     * GET api/equipos/id/{nombre}
      */
     public function getIdByName($nombre)
     {
@@ -56,7 +56,7 @@ class EquiposController extends Controller
 
     /**
      * Crea un nuevo equipo utilizando los datos recibidos
-     * api/equipos
+     * POST api/equipos
      * Body associated:
      * {
      *    "nombre": "nombre_equipo_a_insertar
@@ -74,7 +74,7 @@ class EquiposController extends Controller
 
     /**
      * Eliminar un equipo por su ID.
-     * api/equipos/{id}
+     * DELETE api/equipos/{id}
      */
     public function destroy($id)
     {
@@ -97,7 +97,7 @@ class EquiposController extends Controller
     
     /**
      * Actualizar el nombre de un equipo.
-     * api/equipos/{id}
+     * PUT api/equipos/{id}
      * {
      *    "nombre": "nombre_equipo_actualizado
      * } 
