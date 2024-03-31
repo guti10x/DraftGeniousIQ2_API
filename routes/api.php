@@ -42,4 +42,12 @@ Route::get('/jugadores', [JugadoresController::class, 'index']); //Obtener todas
 Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']); //Obtener jugador por su ID y devolver nombre, posición y equipo.
 Route::get('/jugadores/{id}/edad-altura-peso', [JugadoresController::class, 'getEdadAlturaPeso']);  //Buscar jugador por su ID y devolver edad, altura y peso.
 Route::post('/jugadores', [JugadoresController::class, 'store']); //Añadir a la tabla jugadores un nuevo jugador con sus estadísticas globales asociadas
+Route::put('/jugadores/{jugadores}', [JugadoresController::class, 'update']); // Actualiza el conjunto de atributos globales asociados a un jugador
+Route::put('/jugadores/{jugador}/id_jugador  ', [JugadoresController::class, 'updateIdEquipo']); // Actualizar el ID del equipo asociado a un jugador
+Route::put('/jugadores/{jugador}/nombre', [JugadoresController::class, 'updateName']); // Actualiza el nombre de un jugador
+Route::put('/jugadores/{jugador}/posicion', [JugadoresController::class, 'updatePosition']); // Actualiza la posición de un jugador
+Route::put('/jugadores/{jugador}/equipo', [JugadoresController::class, 'updateTeam']); // Actualiza el equipo de un jugador
+Route::put('/jugadores/{jugador}/edad', [JugadoresController::class, 'updateAge']); // Actualiza la edad de un jugador
+Route::put('/jugadores/{jugador}/altura', [JugadoresController::class, 'updateHeight']); // Actualiza la altura de un jugador
+Route::put('/jugadores/{jugador}/peso', [JugadoresController::class, 'updateWeight']); // Actualiza el peso de un jugador
 Route::delete('/jugadores/{id}', [JugadoresController::class, 'destroy']); //Eliminar un jugador por su id
