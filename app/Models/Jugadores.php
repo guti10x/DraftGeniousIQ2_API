@@ -20,4 +20,9 @@ class Jugadores extends Model
         'altura',
         'peso',
     ];
+
+    public function equipo()
+    {
+        return $this->belongsTo(Equipos::class);
+    }
 }

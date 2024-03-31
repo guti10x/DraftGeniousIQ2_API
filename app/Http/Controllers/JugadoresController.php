@@ -54,6 +54,53 @@ class JugadoresController extends Controller
         return response()->json($jugadorInfo, 200);
     }
     
+    /**
+     * Devolver todos los jugadores que pertenecen a un equipo por su id_equipo asociado
+     * GET api/jugadores/por-posicion/{id}  
+     * Ej: http://127.0.0.1:8000/api/jugadores/por-posicion/1
+    */
+    public function jugadoresPorIdEquipo($id_equipo)
+    {
+        // Obtener todos los jugadores que pertenecen al equipo con el ID proporcionado
+        $jugadores = Jugadores::where('id_equipo', $id_equipo)
+                            ->select('id_player', 'nombre', 'posicion')
+                            ->get();
+
+        // Devolver los jugadores
+        return response()->json($jugadores, 200);
+    }
+
+    /**
+     * Devolver todos los jugadores de juegan en la misma posición
+     * GET api/jugadores/por-posicion/{posición}  
+     * Ej: http://127.0.0.1:8000/api/jugadores/por-posicion/DL
+    */
+    public function jugadoresPorPosicion($posicion)
+    {
+        // Obtener todos los jugadores que tengan la posición especificada
+        $jugadores = Jugadores::where('posicion', $posicion)
+                            ->select('id_player', 'nombre', 'posicion')
+                            ->get();
+
+        // Devolver los jugadores
+        return response()->json($jugadores, 200);
+    }
+
+    /**
+     * Devolver todos los jugadores que pertenecen al mismo equipo de LaLiga
+     * GET api/jugadores/por-posicion/{posición}  
+     * Ej: http://127.0.0.1:8000/api/jugadores/por-equipo/Real Madrid
+    */
+    public function jugadoresPorEquipo($equipo)
+    {
+        // Obtener todos los jugadores que pertenecen al equipo especificado
+        $jugadores = Jugadores::where('equipo', $equipo)
+                            ->select('id_player', 'nombre', 'posicion')
+                            ->get();
+
+        // Devolver los jugadores
+        return response()->json($jugadores, 200);
+    }
     
     /**
      * Añadir a la tabla jugadores un nuevo jugador con sus estadísticas globales asociadas
