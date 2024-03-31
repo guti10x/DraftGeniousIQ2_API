@@ -54,22 +54,47 @@ class JugadoresController extends Controller
         return response()->json($jugadorInfo, 200);
     }
     
-
+    
     /**
-     * Store a newly created resource in storage.
+     * Añadir a la tabla jugadores un nuevo jugador con sus estadísticas globales asociadas
+     * POST api/jugadores
+     * {
+     * "nombre": "mombre del jugaodr a insertar",
+     * "posicion": "posición_del_jugador_a_insertar",
+     * "equipo": "equipo_del_jugador_a_insertar",
+     * "edad": "edad_del_jugador_a_insertar,
+     * "altura": "altura_del_jugador_a_insertar,
+     * "peso": "peso_del_jugador_a_insertar
+     * }
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos de la solicitud
+        $request->validate([
+            'nombre' => 'required',
+            'posicion' => 'required',
+            'equipo' => 'required',
+            'edad' => 'required|integer',
+            'altura' => 'required|numeric',
+            'peso' => 'required|integer',
+        ]);
+    
+        // Crear una nueva instancia del modelo Jugador y asignar los valores de la solicitud
+        $jugador = new Jugadores();
+        $jugador->nombre = $request->nombre;
+        $jugador->posicion = $request->posicion;
+        $jugador->equipo = $request->equipo;
+        $jugador->edad = $request->edad;
+        $jugador->altura = $request->altura;
+        $jugador->peso = $request->peso;
+    
+        // Guardar el jugador en la base de datos
+        $jugador->save();
+    
+        // Devolver una respuesta indicando que el jugador se ha almacenado correctamente
+        return response()->json(['message' => 'Jugador almacenado correctamente'], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Jugadores $jugadores)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -80,10 +105,25 @@ class JugadoresController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar un jugador por su id
+     * DELETE api/jugadores/{id}
      */
-    public function destroy(Jugadores $jugadores)
+    public function destroy($id)
     {
-        //
+        // Buscar el jugador por su ID
+        $jugador = Jugadores::find($id);
+
+        // Verificar si el jugador existe
+        if (!$jugador) {
+            // Si el jugador no existe, devolver un mensaje de error
+            return response()->json(['message' => 'Jugador no encontrado'], 404);
+        }
+
+        // Eliminar el jugador de la base de datos
+        $jugador->delete();
+
+        // Devolver un mensaje de éxito
+        return response()->json(['message' => 'Jugador eliminado correctamente']);
     }
+
 }

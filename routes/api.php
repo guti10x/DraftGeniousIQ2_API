@@ -39,6 +39,7 @@ Route::get('/equipos/{equipo}/estadisticas/last-stats', [EstadisticasEquiposCont
 
 #JUGADORES
 Route::get('/jugadores', [JugadoresController::class, 'index']); //Obtener todas las estadísticas globales de un jugador
-Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']);
-Route::get('/jugadores/{id}/edad-altura-peso', [JugadoresController::class, 'getEdadAlturaPeso']);
-
+Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']); //Obtener jugador por su ID y devolver nombre, posición y equipo.
+Route::get('/jugadores/{id}/edad-altura-peso', [JugadoresController::class, 'getEdadAlturaPeso']);  //Buscar jugador por su ID y devolver edad, altura y peso.
+Route::post('/jugadores', [JugadoresController::class, 'store']); //Añadir a la tabla jugadores un nuevo jugador con sus estadísticas globales asociadas
+Route::delete('/jugadores/{id}', [JugadoresController::class, 'destroy']); //Eliminar un jugador por su id
