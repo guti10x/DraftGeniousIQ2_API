@@ -25,4 +25,9 @@ class Jugadores extends Model
     {
         return $this->belongsTo(Equipos::class);
     }
+
+    public function estadisticasJornadas()
+    {
+        return $this->hasMany(EstadisticasJornadas::class);
+    }
 }
