@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\EstadisticasEquiposController;
 use App\Http\Controllers\JugadoresController;
+use App\Http\Controllers\EstadisticasJornadasController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -54,3 +55,7 @@ Route::put('/jugadores/{jugador}/edad', [JugadoresController::class, 'updateAge'
 Route::put('/jugadores/{jugador}/altura', [JugadoresController::class, 'updateHeight']); // Actualiza la altura de un jugador
 Route::put('/jugadores/{jugador}/peso', [JugadoresController::class, 'updateWeight']); // Actualiza el peso de un jugador
 Route::delete('/jugadores/{id}', [JugadoresController::class, 'destroy']); //Eliminar un jugador por su id
+
+#ESTADÍSTICAS JORNADA
+Route::get('/estadisticas-jornadas', [EstadisticasJornadasController::class, 'index']); //Obtener TODAS las estadísticas asociadas a TODOS los jugadores
+Route::get('estadisticas-jornadas/{id}/estadisticas', [EstadisticasJornadasController::class, 'mostrarTodasEstadisticasJugador']); //Obtener todas las últimas estadísticas (las más recientes), asociadas al id de un jugador que NO son nulas

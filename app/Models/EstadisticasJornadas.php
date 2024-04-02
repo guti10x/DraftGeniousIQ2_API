@@ -16,7 +16,6 @@ class EstadisticasJornadas extends Model
     protected $fillable = [
         'id_player',
         'jornada',
-        'timestamp',
         'puntuacion_fantasy',
         'puntuacion_as',
         'puntuacion_marca',
