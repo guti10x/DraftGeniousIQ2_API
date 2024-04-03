@@ -59,3 +59,4 @@ Route::delete('/jugadores/{id}', [JugadoresController::class, 'destroy']); //Eli
 #ESTADÍSTICAS JORNADA
 Route::get('/estadisticas-jornadas', [EstadisticasJornadasController::class, 'index']); //Obtener TODAS las estadísticas asociadas a TODOS los jugadores
 Route::get('estadisticas-jornadas/{id}/estadisticas', [EstadisticasJornadasController::class, 'mostrarTodasEstadisticasJugador']); //Obtener todas las últimas estadísticas (las más recientes), asociadas al id de un jugador que NO son nulas
+Route::post('/estadisticas-jornadas', [EstadisticasJornadasController::class, 'store']); //Añadir a la tabla estadisticas_jugadores una nueva estadística asociada un jugador y jornada.
