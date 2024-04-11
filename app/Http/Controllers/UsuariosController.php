@@ -79,7 +79,7 @@ class UsuariosController extends Controller
 
 
     /**
-     * //Registrar nuevo usuario en la bd 
+     * Registrar nuevo usuario en la bd 
      * POST api/usuarios
      * {
      * "name": "nombre_nuevo_usuario",
@@ -255,6 +255,22 @@ class UsuariosController extends Controller
             // Devolver una respuesta de error si el valor no es 0 ni 1
             return response()->json(['error' => 'El valor de rol debe ser 0 o 1'], 422);
         }
+    }
+
+    /**
+     * Eliminar un usuario por su ID.
+     * DELETE /usuarios/{id_user_a_eliminar
+     */
+    public function destroy($id)
+    {
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        // Eliminar el usuario
+        $usuario->delete();
+
+        // Devolver una respuesta JSON con un mensaje de éxito
+        return response()->json(['message' => 'Usuario eliminado correctamente']);
     }
 
 }

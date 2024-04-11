@@ -9,10 +9,6 @@ use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\EstadisticasJornadasController;
 use App\Http\Controllers\UsuariosController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 # EQUIPOS:
 Route::get('/equipos', [EquiposController::class, 'index']); // Obtener todos los equipos
 Route::get('/equipos/{equipo}', [EquiposController::class, 'getNameById']); // Obtener NAME de un equipo por su ID
@@ -69,8 +65,9 @@ Route::get('/usuarios/{id}', [UsuariosController::class, 'showById']); // Devolv
 Route::get('/usuarios/nombre/{name}', [UsuariosController::class, 'showByName']); //Devolver datos de un usuarios buscado en la bd por su nombre
 Route::get('/usuarios/rol/1', [UsuariosController::class, 'getUsersWithRolOne']); //Obtener todos los usuarios con rol 1 (admin)
 Route::get('/usuarios/rol/0', [UsuariosController::class, 'getUsersWithRolZero']); //Obtener todos los usuarios con rol 0 (user app)
-Route::put('/usuarios/{id}/actualizar-nombre', [UsuariosController::class, 'updateName']);
-Route::put('/usuarios/{id}/actualizar-email', [UsuariosController::class, 'updateEmail']);
-Route::put('/usuarios/{id}/actualizar-password', [UsuariosController::class, 'updatePassword']);
-Route::put('/usuarios/{id}/actualizar-id-equipo', [UsuariosController::class, 'updateTeamId']);
-Route::put('/usuarios/{id}/actualizar-rol', [UsuariosController::class, 'updateRole']);
+Route::put('/usuarios/{id}/actualizar-nombre', [UsuariosController::class, 'updateName']); // Actualizar el nombre del usuario
+Route::put('/usuarios/{id}/actualizar-email', [UsuariosController::class, 'updateEmail']); // Actualizar el correo electrónico del usuario
+Route::put('/usuarios/{id}/actualizar-password', [UsuariosController::class, 'updatePassword']); // Actualizar la contraseña del usuario
+Route::put('/usuarios/{id}/actualizar-id-equipo', [UsuariosController::class, 'updateTeamId']); //Actualizar el ID del equipo del usuario
+Route::put('/usuarios/{id}/actualizar-rol', [UsuariosController::class, 'updateRole']); //Actualizar el rol del usuario
+Route::delete('/usuarios/{id}', [UsuariosController::class, 'destroy']); //Eliminar usuario por id
