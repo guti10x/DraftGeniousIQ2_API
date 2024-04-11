@@ -7,6 +7,7 @@ use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\EstadisticasEquiposController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\EstadisticasJornadasController;
+use App\Http\Controllers\UsuariosController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -60,3 +61,11 @@ Route::delete('/jugadores/{id}', [JugadoresController::class, 'destroy']); //Eli
 Route::get('/estadisticas-jornadas', [EstadisticasJornadasController::class, 'index']); //Obtener TODAS las estadísticas asociadas a TODOS los jugadores
 Route::get('estadisticas-jornadas/{id}/estadisticas', [EstadisticasJornadasController::class, 'mostrarTodasEstadisticasJugador']); //Obtener todas las últimas estadísticas (las más recientes), asociadas al id de un jugador que NO son nulas
 Route::post('/estadisticas-jornadas', [EstadisticasJornadasController::class, 'store']); //Añadir a la tabla estadisticas_jugadores una nueva estadística asociada un jugador y jornada.
+
+#USERS
+Route::get('/usuarios', [UsuariosController::class, 'index']); //Obtener todos los usuarios y datos asociados a estos almacenados en la base de datos
+Route::post('/usuarios', [UsuariosController::class, 'store']); //Registrar nuevo usuario en la bd 
+Route::get('/usuarios/{id}', [UsuariosController::class, 'showById']); // Devolver datos de un usuarios buscado en la bd por su nombre
+Route::get('/usuarios/nombre/{name}', [UsuariosController::class, 'showByName']); //Devolver datos de un usuarios buscado en la bd por su nombre
+Route::get('/usuarios/rol/1', [UsuariosController::class, 'getUsersWithRolOne']); //Obtener todos los usuarios con rol 1 (admin)
+Route::get('/usuarios/rol/0', [UsuariosController::class, 'getUsersWithRolZero']); //Obtener todos los usuarios con rol 0 (user app)
