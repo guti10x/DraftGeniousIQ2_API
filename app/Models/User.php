@@ -49,4 +49,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function equipo()
+    {
+        return $this->belongsTo(Equipos::class, 'id_equipo');
+    }
 }

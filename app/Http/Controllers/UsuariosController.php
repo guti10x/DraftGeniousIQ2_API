@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\equipos;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UsuariosController extends Controller
 {
@@ -19,7 +21,7 @@ class UsuariosController extends Controller
     
     /**
      * Buscar usuario por su ID y devolver todos los datos almacenados en la bd sobre el usuario encontrado
-     * GET api/usuarios/id_usuario_a_obtener_datos     
+     * GET api/usuarios/{id_usuario_a_obtener_datos}     
     */
     public function showById($id)
     {
@@ -32,7 +34,7 @@ class UsuariosController extends Controller
 
     /**
      * Buscar usuario por su NOMBRE y devolver todos los datos almacenados en la bd sobre el usuario encontrado
-     * GET api/usuarios/id_usuario_a_obtener_datos
+     * GET api/usuarios/{id_usuario_a_obtener_datos}
     */
     public function showByName($name)
     {
@@ -94,10 +96,19 @@ class UsuariosController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string',
-            'rol' => 'nullable|integer', // Validación actualizada para aceptar un entero
-            'id_team' => 'required|integer',
+            'rol' => 'nullable|integer|in:0,1', // El rol solo puede ser 0 o 1
+            'id_team' => [
+                'required',
+                'integer',
+                function ($attribute, $value, $fail) {
+                    // Verificar si el ID de equipo existe en la tabla equipos
+                    if (!Equipos::where('id_equipo', $value)->exists()) {
+                        $fail('El ID del equipo no existe.');
+                    }
+                },
+            ],
         ]);
-
+    
         // Crear el usuario
         $usuario = User::create([
             'name' => $request->name,
@@ -106,9 +117,144 @@ class UsuariosController extends Controller
             'rol' => $request->rol,
             'id_team' => $request->id_team,
         ]);
-
+    
         // Devolver una respuesta JSON con el usuario creado y el código de estado 201 (created)
         return response()->json(['usuario' => $usuario], 201);
-    }   
+    }
+
+    /**
+     * Actualizar el nombre del usuario.
+     * PUT api/usuarios/{id_usuario_nombre_a_actualizar}/actualizar-nombre
+     * {
+     *    "name": "nombre_actualizado",
+     * }
+    */
+    public function updateName(Request $request, $id)
+    {
+        // Validar los datos recibidos
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        // Actualizar el nombre del usuario
+        $usuario->name = $request->name;
+        $usuario->save();
+
+        // Devolver una respuesta JSON con el usuario actualizado
+        return response()->json(['usuario' => $usuario]);
+    }
+
+    /**
+     * Actualizar el correo electrónico del usuario.
+     * PUT api/usuarios/{id_usuario_nombre_a_actualizar}/actualizar-email
+     * {
+     * "email": "correo_actualizado"
+     * }
+    */
+    public function updateEmail(Request $request, $id)
+    {
+        // Validar los datos recibidos
+        $request->validate([
+            'email' => [
+                'required',
+                'email',
+                'regex:/^.+@.+\..+$/i', // Asegura que el correo electrónico contenga un '@'
+                Rule::unique('users')->ignore($id),
+            ],
+        ]);
+
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        // Actualizar el correo electrónico del usuario
+        $usuario->email = $request->email;
+        $usuario->save();
+
+        // Devolver una respuesta JSON con el usuario actualizado
+        return response()->json(['usuario' => $usuario]);
+    }
+
+    /**
+     * Actualizar la contraseña del usuario.
+     * PUT api/usuarios/{id_usuario_nombre_a_actualizar}/actualizar-password
+     * {
+     * "email": "contraseña_actualizada"
+     * }
+    */
+    public function updatePassword(Request $request, $id)
+    {
+        // Validar los datos recibidos
+        $request->validate([
+            'password' => 'required|string',
+        ]);
+
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        // Actualizar la contraseña del usuario
+        $usuario->password = bcrypt($request->password);
+        $usuario->save();
+
+        // Devolver una respuesta JSON con el usuario actualizado
+        return response()->json(['usuario' => $usuario]);
+    }
+
+    /**
+     * Actualizar el ID del equipo del usuario.
+     * PUT api/usuarios/{id_usuario_nombre_a_actualizar}/actualizar-id-equipo
+     * {
+     * "email": "id_equipo_asociado_actualizado"
+     * }
+    */
+    public function updateTeamId(Request $request, $id)
+    {
+        // Validar que el id del equipo al que se quiere actualizar existe en la tabla equipo
+        $request->validate([
+            'id_team' => 'required|exists:equipos,id_equipo',
+        ]);
+    
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+    
+        // Actualizar el ID del equipo del usuario
+        $usuario->id_team = $request->id_team;
+        $usuario->save();
+    
+        // Devolver una respuesta JSON con el usuario actualizado
+        return response()->json(['usuario' => $usuario]);
+    }
+
+    /**
+     * Actualizar el rol del usuario.
+     * PUT api/usuarios/{id_usuario_nombre_a_actualizar}/actualizar-rol
+     * {
+     * "id_team": rol_actualizado_entre_0_y_1
+     * }
+    */
+    public function updateRole(Request $request, $id)
+    {
+        // Validar los datos recibidos
+        $request->validate([
+            'rol' => 'required|in:0,1',
+        ]);
+
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        // Actualizar el rol del usuario solo si el valor es 0 o 1
+        if ($request->rol == 0 || $request->rol == 1) {
+            $usuario->rol = $request->rol;
+            $usuario->save();
+
+            // Devolver una respuesta JSON con el usuario actualizado
+            return response()->json(['usuario' => $usuario]);
+        } else {
+            // Devolver una respuesta de error si el valor no es 0 ni 1
+            return response()->json(['error' => 'El valor de rol debe ser 0 o 1'], 422);
+        }
+    }
 
 }

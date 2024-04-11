@@ -24,4 +24,9 @@ class equipos extends Model
     {
         return $this->hasMany(Jugadores::class, 'id_equipo', 'id_equipo');
     }
+
+    public function usuario()
+    {
+        return $this->hasOne(User::class, 'id_equipo');
+    }
 }
