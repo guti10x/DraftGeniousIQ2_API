@@ -8,6 +8,7 @@ use App\Http\Controllers\EstadisticasEquiposController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\EstadisticasJornadasController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\NotificacionesController;
 
 # EQUIPOS:
 Route::get('/equipos', [EquiposController::class, 'index']); // Obtener todos los equipos
@@ -71,3 +72,7 @@ Route::put('/usuarios/{id}/actualizar-password', [UsuariosController::class, 'up
 Route::put('/usuarios/{id}/actualizar-id-equipo', [UsuariosController::class, 'updateTeamId']); //Actualizar el ID del equipo del usuario
 Route::put('/usuarios/{id}/actualizar-rol', [UsuariosController::class, 'updateRole']); //Actualizar el rol del usuario
 Route::delete('/usuarios/{id}', [UsuariosController::class, 'destroy']); //Eliminar usuario por id
+
+#NOTIFICACIONES
+Route::get('/notificaciones', [NotificacionesController::class, 'index']);
+Route::post('/notificaciones', [NotificacionesController::class, 'store']);

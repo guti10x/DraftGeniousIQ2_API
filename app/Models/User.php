@@ -50,8 +50,15 @@ class User extends Authenticatable
         ];
     }
 
+    # Relación 1-1 con equipos
     public function equipo()
     {
         return $this->belongsTo(Equipos::class, 'id_equipo');
+    }
+
+    # Relación 1-N con notificaciones
+    public function notificaciones()
+    {
+        return $this->hasMany(Notificaciones::class, 'id_user');
     }
 }
