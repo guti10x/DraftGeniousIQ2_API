@@ -19,6 +19,7 @@ class EstadisticasEquipos extends Model
         'num_jugadores',
     ];
 
+    # Relación N-1 con equipo
     public function equipo()
     {
         return $this->belongsTo(Equipos::class);

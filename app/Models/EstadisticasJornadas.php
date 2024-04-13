@@ -80,6 +80,7 @@ class EstadisticasJornadas extends Model
         'updated_at',
     ];
 
+    # Relación N-1 con jugadores
     public function jugador()
     {
         return $this->belongsTo(Jugadores::class);
