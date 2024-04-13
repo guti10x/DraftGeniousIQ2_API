@@ -79,6 +79,10 @@ Route::get('/notificaciones/{id_ntf}', [NotificacionesController::class, 'getByI
 Route::get('/notificaciones/user/{id_user}', [NotificacionesController::class, 'getByUserId']); // Obtener todas las notificaciones de un usuario por su id_user
 Route::get('/notificaciones/type/{type}', [NotificacionesController::class, 'getByType']); // Obtener todas las notificaciones de un tipo específico por su type
 Route::post('/notificaciones', [NotificacionesController::class, 'store']); //Almacenar nueva notificación en la bd
+Route::put('/notificaciones/{id_ntf}/updateUserId', [NotificacionesController::class, 'updateUserId']); // Actualizar el id_user de una notificación
+Route::put('/notificaciones/{id_ntf}/updateTitle', [NotificacionesController::class, 'updateTitle']); // Actualizar el título de una notificación
+Route::put('/notificaciones/{id_ntf}/updateContent', [NotificacionesController::class, 'updateContent']); // Actualizar el contenido de una notificación
+Route::put('/notificaciones/{id_ntf}/updateType', [NotificacionesController::class, 'updateType']); // Actualizar el tipo de una notificación
 Route::delete('/notificaciones/{id}', [NotificacionesController::class, 'destroy']); //Eliminar notificación por ID_notificación
 Route::delete('/notificaciones/user/{id_user}', [NotificacionesController::class, 'destroyByUserId']); //Eliminar notificación por ID_user
 Route::delete('/notificaciones/type/{type}', [NotificacionesController::class, 'destroyByType']); //Eliminar por tipo de notificación

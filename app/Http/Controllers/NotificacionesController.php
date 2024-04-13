@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notificaciones;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class NotificacionesController extends Controller
 {
-    /**
+    /*
      * Devolver todas las notificaciones almacenadas en la bd
      * GET api/notificaciones
     */
@@ -20,7 +22,7 @@ class NotificacionesController extends Controller
         return response()->json(['notificaciones' => $notificaciones]);
     }
 
-    /**
+    /*
      * Método para devolver todas las notificaciones de un usuario específico por su id_user
      * GET api/notificaciones/id_user/{id_ntf}
     */
@@ -83,16 +85,95 @@ class NotificacionesController extends Controller
     }
 
     
-    /**
-     * Update the specified resource in storage.
+    /*
+     * Método para actualizar el id_user de una notificación
+     * PUT {id_ntf}/updateUserId
     */
-    public function update(Request $request, Notificaciones $notificaciones)
+    public function updateUserId(Request $request, $id_ntf)
     {
-        //
+        // Buscar la notificación por su id_ntf
+        $notificacion = Notificaciones::find($id_ntf);
+
+        // Verificar si la notificación existe
+        if (!$notificacion) {
+            return response()->json(['message' => 'Notificación no encontrada'], 404);
+        }
+
+        // Obtener el id_user enviado en la solicitud
+        $id_user = $request->input('id_user');
+
+        // Verificar si el id_user existe en la tabla de usuarios
+        $userExists = User::where('id', $id_user)->exists();
+
+        // Si el id_user no existe, devolver un mensaje de error
+        if (!$userExists) {
+            return response()->json(['message' => 'El ID de usuario proporcionado no existe'], 400);
+        }
+
+        // Actualizar el id_user de la notificación
+        $notificacion->id_user = $id_user;
+        $notificacion->save();
+
+        // Devolver una respuesta de éxito
+        return response()->json(['message' => 'ID de usuario actualizado correctamente'], 200);
+    }
+
+    /* 
+     * Método para actualizar el título de una notificación
+     * PUT api/notificaciones/{id_ntf}/updateTitle
+    */
+    public function updateTitle(Request $request, $id_ntf)
+    {
+        $notificacion = Notificaciones::find($id_ntf);
+
+        if (!$notificacion) {
+            return response()->json(['message' => 'Notificación no encontrada'], 404);
+        }
+
+        $notificacion->title = $request->input('title');
+        $notificacion->save();
+
+        return response()->json(['message' => 'Título actualizado correctamente'], 200);
+    }
+
+    /* 
+     * Método para actualizar el contenido de una notificación
+     * PUT api/notificaciones/{id_ntf}/updateTitle
+    */
+    public function updateContent(Request $request, $id_ntf)
+    {
+        $notificacion = Notificaciones::find($id_ntf);
+
+        if (!$notificacion) {
+            return response()->json(['message' => 'Notificación no encontrada'], 404);
+        }
+
+        $notificacion->content = $request->input('content');
+        $notificacion->save();
+
+        return response()->json(['message' => 'Contenido actualizado correctamente'], 200);
+    }
+
+    /* 
+     * Método para actualizar el tipo de una notificación
+     *  PUT api/notificaciones/{id_ntf}/updateType
+    */
+    public function updateType(Request $request, $id_ntf)
+    {
+        $notificacion = Notificaciones::find($id_ntf);
+
+        if (!$notificacion) {
+            return response()->json(['message' => 'Notificación no encontrada'], 404);
+        }
+
+        $notificacion->type = $request->input('type');
+        $notificacion->save();
+
+        return response()->json(['message' => 'Tipo de notificación actualizado correctamente'], 200);
     }
 
 
-    /**
+    /*
      * Eliminar notificación por ID de notificación
      * DELETE /notificaciones/{id}
     */
@@ -114,7 +195,7 @@ class NotificacionesController extends Controller
         return response()->json(['message' => 'Notificación eliminada correctamente'], 200);
     }
 
-    /**
+    /*
      * Eliminar notificación por ID de notificación
      * DELETE /notificaciones/user/{id}
     */
@@ -136,7 +217,7 @@ class NotificacionesController extends Controller
         return response()->json(['message' => 'Todas las notificaciones asociadas al usuario han sido eliminadas correctamente'], 200);
     }
 
-    /**
+    /*
      * Eliminar notificación por TIPO de notificación
      * DELETE /notificaciones/type/{type}
     */
