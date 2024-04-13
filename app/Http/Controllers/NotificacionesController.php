@@ -10,7 +10,7 @@ class NotificacionesController extends Controller
     /**
      * Devolver todas las notificaciones almacenadas en la bd
      * GET api/notificaciones
-     */
+    */
     public function index()
     {
         // Obtener todas las notificaciones
@@ -21,8 +21,45 @@ class NotificacionesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
+     * Método para devolver todas las notificaciones de un usuario específico por su id_user
+     * GET api/notificaciones/id_user/{id_ntf}
+    */
+    public function getById($id_ntf)
+    {
+        $notificacion = Notificaciones::find($id_ntf);
+
+        if (!$notificacion) {
+            return response()->json(['message' => 'Notificación no encontrada'], 404);
+        }
+
+        return response()->json(['notificacion' => $notificacion], 200);
+    }
+
+    /**
+     * Método para devolver todas las notificaciones de un usuario específico por su id_user
+     * GET api/notificaciones/{id_user}
+    */
+    public function getByUserId($id_user)
+    {
+        $notificaciones = Notificaciones::where('id_user', $id_user)->get();
+        return response()->json(['notificaciones' => $notificaciones], 200);
+    }
+
+    /**
+     * Método para devolver todas las notificaciones de un tipo específico por su type
+     * GET api/notificaciones/{type}'
+    */
+    public function getByType($type)
+    {
+        $notificaciones = Notificaciones::where('type', $type)->get();
+        return response()->json(['notificaciones' => $notificaciones], 200);
+    }
+
+
+    /**
+     * Almacenar nueva notificación en la bd
+     * POST api/notificaciones
+    */
     public function store(Request $request)
     {
         // Validar los datos recibidos
@@ -45,28 +82,80 @@ class NotificacionesController extends Controller
         return response()->json(['notificacion' => $notificacion], 201);
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Notificaciones $notificaciones)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
-     */
+    */
     public function update(Request $request, Notificaciones $notificaciones)
     {
         //
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Notificaciones $notificaciones)
+     * Eliminar notificación por ID de notificación
+     * DELETE /notificaciones/{id}
+    */
+    public function destroy($id)
     {
-        //
+        // Buscar la notificación por su ID
+        $notificacion = Notificaciones::find($id);
+
+        // Verificar si la notificación existe
+        if (!$notificacion) {
+            // Si la notificación no existe, devolver un mensaje de error con el código de estado 404 (No encontrado)
+            return response()->json(['message' => 'Notificación no encontrada'], 404);
+        }
+
+        // Eliminar la notificación
+        $notificacion->delete();
+
+        // Devolver un mensaje de éxito con el código de estado 200 (Éxito)
+        return response()->json(['message' => 'Notificación eliminada correctamente'], 200);
     }
+
+    /**
+     * Eliminar notificación por ID de notificación
+     * DELETE /notificaciones/user/{id}
+    */
+    public function destroyByUserId($id_user)
+    {
+        // Buscar todas las notificaciones asociadas al id_user
+        $notificaciones = Notificaciones::where('id_user', $id_user)->get();
+
+        // Verificar si hay notificaciones asociadas al id_user
+        if ($notificaciones->isEmpty()) {
+            // Si no hay notificaciones asociadas, devolver un mensaje de error con el código de estado 404 (No encontrado)
+            return response()->json(['message' => 'No se encontraron notificaciones asociadas a este usuario'], 404);
+        }
+
+        // Eliminar todas las notificaciones asociadas al id_user
+        Notificaciones::where('id_user', $id_user)->delete();
+
+        // Devolver un mensaje de éxito con el código de estado 200 (Éxito)
+        return response()->json(['message' => 'Todas las notificaciones asociadas al usuario han sido eliminadas correctamente'], 200);
+    }
+
+    /**
+     * Eliminar notificación por TIPO de notificación
+     * DELETE /notificaciones/type/{type}
+    */
+    public function destroyByType($type)
+    {
+        // Buscar todas las notificaciones asociadas al tipo
+        $notificaciones = Notificaciones::where('type', $type)->get();
+
+        // Verificar si hay notificaciones asociadas al tipo
+        if ($notificaciones->isEmpty()) {
+            // Si no hay notificaciones asociadas, devolver un mensaje de error con el código de estado 404 (No encontrado)
+            return response()->json(['message' => 'No se encontraron notificaciones asociadas a este tipo'], 404);
+        }
+
+        // Eliminar todas las notificaciones asociadas al tipo
+        Notificaciones::where('type', $type)->delete();
+
+        // Devolver un mensaje de éxito con el código de estado 200 (Éxito)
+        return response()->json(['message' => 'Todas las notificaciones asociadas al tipo han sido eliminadas correctamente'], 200);
+    }
+
 }
