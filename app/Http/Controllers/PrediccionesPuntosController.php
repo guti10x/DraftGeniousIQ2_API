@@ -35,7 +35,7 @@ class PrediccionesPuntosController extends Controller
 
     /*
     *  Obtener LA ÚLTIMA predicción_de_puntos asociada a un player
-    *  GET api/pred_puntos/player/{id_player}
+    *  GET api/pred_puntos/player/{id_player}/last
     */
     public function getLastByPlayer($id_player)
     {
