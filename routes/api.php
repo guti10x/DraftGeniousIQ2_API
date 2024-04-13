@@ -9,6 +9,7 @@ use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\EstadisticasJornadasController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\NotificacionesController;
+use App\Http\Controllers\PrediccionesPuntosController;
 
 # EQUIPOS:
 Route::get('/equipos', [EquiposController::class, 'index']); // Obtener todos los equipos
@@ -86,3 +87,25 @@ Route::put('/notificaciones/{id_ntf}/updateType', [NotificacionesController::cla
 Route::delete('/notificaciones/{id}', [NotificacionesController::class, 'destroy']); //Eliminar notificación por ID_notificación
 Route::delete('/notificaciones/user/{id_user}', [NotificacionesController::class, 'destroyByUserId']); //Eliminar notificación por ID_user
 Route::delete('/notificaciones/type/{type}', [NotificacionesController::class, 'destroyByType']); //Eliminar por tipo de notificación
+
+#PREDICCIONES PUNTOS
+Route::get('/pred_puntos', [PrediccionesPuntosController::class, 'index']); //Obtener todas las predicciones_de_puntos almacenadas en la bd
+Route::get('/pred_puntos/player/{id_player}', [PrediccionesPuntosController::class, 'getByPlayer']); //Obtener TODAS las predicciones_de_puntos asociadas a un player
+Route::get('/pred_puntos/player/{id_player}/last', [PrediccionesPuntosController::class, 'getLastByPlayer']); //Obtener LA ÚLTIMA predicción_de_puntos asociada a un player
+Route::post('/pred_puntos', [PrediccionesPuntosController::class, 'store']);// Almacenar nueva predicción_de_puntos asociada a un jugador
+Route::put('/pred_puntos/{id_prediccion}/update_player', [PrediccionesPuntosController::class, 'updatePlayer']);  // Modificar id_player asociado a la predicción_de_puntos por id de la predicción
+Route::put('/pred_puntos/{id_prediccion}/update_value', [PrediccionesPuntosController::class, 'updateValue']);  // Modificar valor de la predicción_de_puntos por id de la predicción
+Route::delete('/pred_puntos/{id_prediccion}', [PrediccionesPuntosController::class, 'destroy']);  // Eliminar predicción_de_puntos por su id_predicción 
+Route::delete('/pred_puntos/player/{id_player}/last', [PrediccionesPuntosController::class, 'deleteLastByPlayer']); // Eliminar ultima predicción_de_puntos asociada a un player 
+Route::delete('/pred_puntos/player/{id_player}', [PrediccionesPuntosController::class, 'deleteByPlayer']); // Eliminar todas las predicciones_de_puntos asociadas a un player 
+
+#PREDICCIONES 
+// Obtener todas las predicciones_de_valor_de_mercado almacenadas en la bd
+// Obtener TODAS las predicciones_de_valor_de_mercado asociadas a un player
+// Obtener LA ÚLTIMA predicción_de_valor_de_mercado asociada a un player
+// Almacenar nueva predicción_de_valor_de_mercado asociada a un jugador
+// Modificar id_user asociado_de_valor_de_mercado a la predicción por id_predicción
+// Modificar valor de la predicción_de_valor_de_mercado por id_predicción
+// Eliminar predicción_de_valor_de_mercado por su id_predicción 
+// Eliminar ultima predicción_de_valor_de_mercado asociada a un player 
+// Eliminar todas las predicciones_de_valor_de_mercado asociadas a un player 

@@ -13,6 +13,8 @@ class predicciones_puntos extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['id_player', 'valor'];
+
     // Relación 1-N con Jugador
     public function jugador()
     {
