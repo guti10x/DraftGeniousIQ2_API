@@ -31,12 +31,12 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `GET /equipos/{equipo}/estadisticas`: Obtener todas las estadísticas de un equipo por su ID.
 - `GET /equipos/{equipo}/estadisticas/last-stats`: Obtener la última estadística de un equipo por su ID.
 
-## - DATOS DE JUGADORES:
 - `GET /jugadores`: Obtener todas las estadísticas globales de un jugador.
 - `GET /jugadores/{id}/nombre-posicion-equipo`: Obtener nombre, posición y equipo de un jugador por su ID.
 - `GET /jugadores/{id}/edad-altura-peso`: Obtener edad, altura y peso de un jugador por su ID.
 - `GET /equipos/{id_equipo}/jugadores`: Obtener jugadores por ID de equipo.
-- `GET /jugadores/por-posicion/{posicion}`: Obtener jugadores por posición.
+- `GET /jugadores/por-posiciones/{posicion}`: Obtener jugadores por posición.
+- `GET /equipos/{idEquipo}/jugadores/{posicion}`: Obtener todos los jugadores titulares que juegan en una misma posición de un equipo.
 - `GET /jugadores/por-equipo/{equipo}`: Obtener jugadores por equipo.
 - `POST /jugadores`: Añadir un nuevo jugador con sus estadísticas globales.
 - `PUT /jugadores/{jugadores}`: Actualizar atributos globales de un jugador.

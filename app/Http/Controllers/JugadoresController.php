@@ -71,6 +71,22 @@ class JugadoresController extends Controller
     }
 
     /**
+     * Devolver todos los jugadores TITULARES que juegan en una misma posición de un equipo
+     * GET 
+     * Ej: 
+    */
+    public function obtenerJugadoresTitularesPorPosicion($idEquipo, $posicion)
+    {
+        $jugadoresTitulares = Jugadores::where('id_equipo', $idEquipo)
+            ->where('posicion', $posicion)
+            ->where('titular', 1) // Filtrar solo jugadores titulares
+            ->get();
+
+        return response()->json($jugadoresTitulares);
+    }
+
+
+    /**
      * Devolver todos los jugadores de juegan en la misma posición
      * GET api/jugadores/por-posicion/{posición}  
      * Ej: http://127.0.0.1:8000/api/jugadores/por-posicion/DL
