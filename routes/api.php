@@ -25,6 +25,7 @@ Route::put('/equipos/{equipos}', [EquiposController::class, 'update']); //Actual
 Route::get('/estadisticas-equipos', [EstadisticasEquiposController::class, 'index']); //Obtener TODAS las estadísticas de todos los equipos
 Route::get('/estadisticas-equipos/{id}/stats', [EstadisticasEquiposController::class, 'getStatsById']); //Obtener TODAS las estadísticas asociadas a un ID de un equipo
 Route::get('/estadisticas-equipos/{id}/last-stats', [EstadisticasEquiposController::class, 'getLastStatsById']); //Obtener ÚLTIMA estadística asociada a un ID de un equipo
+Route::get('/equipos/{idEquipo}/money', [EstadisticasEquiposController::class, 'obtenerMoney'])->name('equipos.money'); //Devuelve el dinero que tiene disponible un equipo en su cartera
 Route::post('/estadisticas-equipos', [EstadisticasEquiposController::class, 'store']); // Crear una nueva estadítica asociada un equipo
 Route::put('/estadisticas-equipos/{id}', [EstadisticasEquiposController::class, 'update']); //Actualizar el valor de todas las estadísticas de un equipo
 Route::put('/estadisticas-equipos/{id}/id-equipo', [EstadisticasEquiposController::class, 'updateIdEquipo']); // Actualizar id_equipo asociado a una estadística de un equipo
@@ -42,6 +43,8 @@ Route::get('/equipos/{equipo}/estadisticas/last-stats', [EstadisticasEquiposCont
 #JUGADORES
 Route::get('/jugadores', [JugadoresController::class, 'index']); //Obtener todas las estadísticas globales de un jugador
 Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']); //Obtener jugador por su ID y devolver nombre, posición y equipo.
+Route::get('jugadores/{nombre}', [JugadoresController::class, 'obtenerEquipoPorNombre']); //Obtener equipo al que pertenece un jugador pasándole su nombre
+Route::get('jugadores/transferibles/{trasfervalue}', [JugadoresController::class, 'obtenerJugadoresTransferibles']); //Obtener todos los jugaodres transferibles(1) / no transferibles(0)
 Route::get('/jugadores/{id}/edad-altura-peso', [JugadoresController::class, 'getEdadAlturaPeso']);  //Buscar jugador por su ID y devolver edad, altura y peso.
 Route::get('/equipos/{id_equipo}/jugadores', [JugadoresController::class, 'jugadoresPorIDEquipo']); // Obtener todos los jugadores que pertenecen a un equipo por su id_equipo asociado
 Route::get('/jugadores/por-posiciones/{posicion}', [JugadoresController::class, 'jugadoresPorPosicion']);  //Obtener todos los jugadores de juegan en la misma posición 

@@ -30,9 +30,13 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `DELETE /estadisticas-equipos/{id_equipo}/all`: Eliminar todas las estadísticas de un equipo.
 - `GET /equipos/{equipo}/estadisticas`: Obtener todas las estadísticas de un equipo por su ID.
 - `GET /equipos/{equipo}/estadisticas/last-stats`: Obtener la última estadística de un equipo por su ID.
+- `GET /equipos/{idEquipo}/money`: Devuelve el dinero que tiene disponible un equipo en su cartera.
 
+## - DATOS DE JUGADORES:
 - `GET /jugadores`: Obtener todas las estadísticas globales de un jugador.
 - `GET /jugadores/{id}/nombre-posicion-equipo`: Obtener nombre, posición y equipo de un jugador por su ID.
+- `GET /jugadores/{nombre}`: Obtener equipo al que pertenece un jugador pasando su nombre.
+- `GET /jugadores/transferibles/{trasfervalue}`: Obtener todos los jugadores transferibles (trasfervalue=1) o no transferibles (trasfervalue=0).
 - `GET /jugadores/{id}/edad-altura-peso`: Obtener edad, altura y peso de un jugador por su ID.
 - `GET /equipos/{id_equipo}/jugadores`: Obtener jugadores por ID de equipo.
 - `GET /jugadores/por-posiciones/{posicion}`: Obtener jugadores por posición.

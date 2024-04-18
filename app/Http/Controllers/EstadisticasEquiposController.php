@@ -58,6 +58,25 @@ class EstadisticasEquiposController extends Controller
         }
     }
 
+    /**
+     * Devolver el dinero que tiene disponible un equipo en su cartera
+     * GET api/estadisticas-equipos/{id_equipo}/last-stats
+     */
+    public function obtenerMoney($idEquipo)
+    {
+        // Busca el registro de estadísticas del equipo por su ID
+        $estadisticasEquipo = EstadisticasEquipos::where('id_equipo', $idEquipo)->first();
+
+        // Verifica si se encontraron estadísticas para el equipo
+        if ($estadisticasEquipo) {
+            // Retorna el valor de 'money' del registro encontrado
+            return $estadisticasEquipo->money;
+        } else {
+            // Retorna un mensaje de error si no se encontraron estadísticas para el equipo
+            return "No se encontraron estadísticas para el equipo con ID $idEquipo";
+        }
+    }
+
 
     /**
      * Crea nuevas estadísticas asociadas a un equipo utilizando los datos recibidos en la petición

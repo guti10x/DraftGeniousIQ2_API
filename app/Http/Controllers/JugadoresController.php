@@ -34,7 +34,37 @@ class JugadoresController extends Controller
             'equipo' => $jugador->equipo,
         ];
 
-        return response()->json($jugadorInfo, 200);
+        return response()->json($jugadorInfo, 200); 
+    }
+
+    /**
+     * Obtener equipo al que pertenece un jugador pasándole su nombre.
+     * GET api/jugadores/{nombre_jugador_a_buscar_su_id}
+     * Ej: http://127.0.0.1:8000/api/jugadores/Jude Bellingham
+    */
+    public function obtenerEquipoPorNombre($nombre)
+    {
+        $jugador = Jugadores::where('nombre', $nombre)->first();
+
+        if ($jugador) {
+            return response()->json(['id_equipo' => $jugador->id_equipo]);
+        } else {
+            return response()->json(['error' => 'Jugador no encontrado'], 404);
+        }
+    }
+
+    /**
+     * Obtener todos los jugadores transferibles(si se le pasa 1 como parámetro) // no transferibles(si se le pasa 0 como parámetro)
+     * GET api/jugadores/transferibles/{0(NO transferibles) - 1(transferibles)}
+     * Ej: http://127.0.0.1:8000/api/jugadores/transferibles/1
+    */
+    public function obtenerJugadoresTransferibles($trasfervalue)
+    {
+        // Obtener los jugadores transferibles desde la base de datos
+        $jugadoresTransferibles = Jugadores::where('transferible', $trasfervalue)->get();
+
+        // Devolver los jugadores transferibles
+        return response()->json($jugadoresTransferibles);
     }
 
     /**
@@ -72,8 +102,8 @@ class JugadoresController extends Controller
 
     /**
      * Devolver todos los jugadores TITULARES que juegan en una misma posición de un equipo
-     * GET 
-     * Ej: 
+     * GET api/equipos/{id_equipo}/jugadores/{posicion_jugador}}
+     * Ej: http://127.0.0.1:8000/api/equipos/1/jugadores/DL
     */
     public function obtenerJugadoresTitularesPorPosicion($idEquipo, $posicion)
     {
@@ -84,7 +114,6 @@ class JugadoresController extends Controller
 
         return response()->json($jugadoresTitulares);
     }
-
 
     /**
      * Devolver todos los jugadores de juegan en la misma posición
