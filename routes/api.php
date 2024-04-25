@@ -17,6 +17,7 @@ use App\Models\predicciones_valor_mercado;
 Route::get('/equipos', [EquiposController::class, 'index']); // Obtener todos los equipos
 Route::get('/equipos/{equipo}', [EquiposController::class, 'getNameById']); // Obtener NAME de un equipo por su ID
 Route::get('/equipos/id/{nombre}', [EquiposController::class, 'getIdByName']);// Obtener ID de un equipo por su NAME
+Route::get('/equipos/logo/{id}', [EquiposController::class, 'getLogoById']);// Obtener el logo de un equipo por su ID
 Route::post('/equipos', [EquiposController::class, 'store']); // Crear un nuevo equipo pasándole su nombre
 Route::delete('/equipos/{id}', [EquiposController::class, 'destroy']); //Eliminar un equipo
 Route::put('/equipos/{equipos}', [EquiposController::class, 'update']); //Actualizar nombre d eun equipo
@@ -42,6 +43,7 @@ Route::get('/equipos/{equipo}/estadisticas/last-stats', [EstadisticasEquiposCont
 
 #JUGADORES
 Route::get('/jugadores', [JugadoresController::class, 'index']); //Obtener todas las estadísticas globales de un jugador
+Route::get('/jugadores/transferidos', [JugadoresController::class, 'getTransferidos']); //Obtener todos los jugadores transferidos en el mercado
 Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']); //Obtener jugador por su ID y devolver nombre, posición y equipo.
 Route::get('jugadores/{nombre}', [JugadoresController::class, 'obtenerEquipoPorNombre']); //Obtener equipo al que pertenece un jugador pasándole su nombre
 Route::get('jugadores/transferibles/{trasfervalue}', [JugadoresController::class, 'obtenerJugadoresTransferibles']); //Obtener todos los jugaodres transferibles(1) / no transferibles(0)

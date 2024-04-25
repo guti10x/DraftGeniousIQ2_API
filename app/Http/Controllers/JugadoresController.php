@@ -148,6 +148,19 @@ class JugadoresController extends Controller
     }
     
     /**
+     * Devolver todos los jugadores cuyo atributo transferido_desde esta inicializado
+     * GET api/jugadores/transferidos  
+     * Ej: http://127.0.0.1:8000/api/jugadores/transferidos
+     */
+    public function getTransferidos()
+    {
+        $jugadores = Jugadores::whereNotNull('transferido_desde')->get();
+
+        return response()->json($jugadores);
+    }
+
+
+    /**
      * Añadir a la tabla jugadores un nuevo jugador con sus estadísticas globales asociadas
      * POST api/jugadores
      * {

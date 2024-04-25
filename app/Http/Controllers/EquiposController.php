@@ -33,6 +33,21 @@ class EquiposController extends Controller
         }
     }
 
+    /**
+     * Devuelve la url del equipo consultado
+     * GET api/equipos/{equipo}
+     */
+    public function getLogoById($id)
+    {
+        $equipo = Equipos::find($id);
+    
+        if ($equipo) {
+            return response()->json(['logo' => $equipo->logo]);
+        } else {
+            return response()->json(['mensaje' => 'Equipo no encontrado'], 404);
+        }
+    }
+
 
     /**
      * Devuelve el ID del equipo especificado por su nombre
