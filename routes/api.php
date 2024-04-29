@@ -46,7 +46,8 @@ Route::get('/jugadores', [JugadoresController::class, 'index']); //Obtener todas
 Route::get('/jugadores/transferidos', [JugadoresController::class, 'getTransferidos']); //Obtener todos los jugadores transferidos en el mercado
 Route::get('/jugadores/{id}/nombre-posicion-equipo', [JugadoresController::class, 'getNombrePosicionEquipo']); //Obtener jugador por su ID y devolver nombre, posición y equipo.
 Route::get('jugadores/{nombre}', [JugadoresController::class, 'obtenerEquipoPorNombre']); //Obtener equipo al que pertenece un jugador pasándole su nombre
-Route::get('jugadores/transferibles/{trasfervalue}', [JugadoresController::class, 'obtenerJugadoresTransferibles']); //Obtener todos los jugaodres transferibles(1) / no transferibles(0)
+Route::get('jugadores/transferibles/{trasfervalue}', [JugadoresController::class, 'obtenerJugadoresTransferibles']); //Obtener todos los jugadores transferibles(1) / no transferibles(0)
+Route::get('/jugadores/recomendados/{recomendado}', [JugadoresController::class, 'obtenerJugadoresRecomendados']);  //Obtener todos los jugadores recomendados(1) / no recomendado(1)) por la IA
 Route::get('/jugadores/{id}/edad-altura-peso', [JugadoresController::class, 'getEdadAlturaPeso']);  //Buscar jugador por su ID y devolver edad, altura y peso.
 Route::get('/equipos/{id_equipo}/jugadores', [JugadoresController::class, 'jugadoresPorIDEquipo']); // Obtener todos los jugadores que pertenecen a un equipo por su id_equipo asociado
 Route::get('/jugadores/por-posiciones/{posicion}', [JugadoresController::class, 'jugadoresPorPosicion']);  //Obtener todos los jugadores de juegan en la misma posición 

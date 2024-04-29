@@ -68,6 +68,20 @@ class JugadoresController extends Controller
     }
 
     /**
+     * Obtener todos los jugadores recomendados(1) / no recomendado(1)) por la IA
+     * GET api/jugadores/recomendados/{0(NO recomendado) - 1(recomendado)}
+     * Ej: http://127.0.0.1:8000/api/jugadores/recomendados/1
+    */
+    public function obtenerJugadoresRecomendados($recomendado)
+    {
+        // Obtener los jugadores transferibles desde la base de datos
+        $jugadoresRecomendados = Jugadores::where('recomendado', $recomendado)->get();
+
+        // Devolver los jugadores transferibles
+        return response()->json($jugadoresRecomendados);
+    }
+
+    /**
      * Buscar jugador por su ID y devolver edad, altura y peso.
      * GET api/jugadores/{id}/edad-altura-peso
     */

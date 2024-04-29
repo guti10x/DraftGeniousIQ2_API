@@ -40,6 +40,7 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `GET /jugadores/{id}/nombre-posicion-equipo`: Obtener el nombre, posición y equipo de un jugador por su ID.
 - `GET /jugadores/{nombre}`: Obtener el equipo al que pertenece un jugador pasando su nombre.
 - `GET /jugadores/transferibles/{trasfervalue}`: Obtener todos los jugadores transferibles (1) / no transferibles (0).
+- `GET /jugadores/recomendados/{trasfervalue}`: Obtener todos los jugadores recomendados (1) / no recomendados (0) por la IA.
 - `GET /jugadores/{id}/edad-altura-peso`: Buscar un jugador por su ID y devolver su edad, altura y peso.
 - `GET /equipos/{id_equipo}/jugadores`: Obtener todos los jugadores que pertenecen a un equipo por su ID de equipo asociado.
 - `GET /jugadores/por-posiciones/{posicion}`: Obtener todos los jugadores que juegan en la misma posición.
