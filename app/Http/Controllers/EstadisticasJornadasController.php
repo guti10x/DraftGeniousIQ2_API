@@ -42,7 +42,7 @@ class EstadisticasJornadasController extends Controller
                 }
             }
             // Devolver los datos junto con el código de estado 200 (OK)
-            return response()->json(['data' => $datos], 200);
+            return response()->json($datos, 200);
         } else {
             // Si no se encontraron estadísticas para el jugador dado, devolver un mensaje de error
             return response()->json(['message' => 'No se encontraron estadísticas para el jugador especificado'], 404);

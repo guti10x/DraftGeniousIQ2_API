@@ -30,7 +30,7 @@ class PrediccionesPuntosController extends Controller
         $predicciones = predicciones_puntos::where('id_player', $id_player)->get();
 
         // Devolver las predicciones como respuesta en formato JSON
-        return response()->json(['predicciones_puntos' => $predicciones]);
+        return response()->json($predicciones);
     }
 
     /*
@@ -43,7 +43,7 @@ class PrediccionesPuntosController extends Controller
         $ultimaPrediccion = predicciones_puntos::where('id_player', $id_player)->latest('updated_at')->first();
 
         // Devolver la última predicción como respuesta en formato JSON
-        return response()->json(['ultima_prediccion_puntos' => $ultimaPrediccion]);
+        return response()->json($ultimaPrediccion);
     }
 
     /*

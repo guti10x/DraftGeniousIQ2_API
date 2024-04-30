@@ -28,8 +28,8 @@ class UsuariosController extends Controller
         // Buscar el usuario por su ID
         $usuario = User::findOrFail($id);
 
-        // Devolver una respuesta JSON con todos los datos del usuario
-        return response()->json(['usuario' => $usuario]);
+        // Devolver una respuesta JSON con los datos del usuario directamente
+        return response()->json($usuario);
     }
 
     /**

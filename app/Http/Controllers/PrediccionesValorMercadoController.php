@@ -30,7 +30,7 @@ class PrediccionesValorMercadoController extends Controller
         $predicciones = predicciones_valor_mercado::where('id_player', $id_player)->get();
 
         // Devolver las predicciones como respuesta en formato JSON
-        return response()->json(['predicciones_valor_mercado' => $predicciones]);
+        return response()->json($predicciones);
     }
 
     /*
@@ -43,7 +43,7 @@ class PrediccionesValorMercadoController extends Controller
         $ultimaPrediccion = predicciones_valor_mercado::where('id_player', $id_player)->latest('updated_at')->first();
 
         // Devolver la última predicción como respuesta en formato JSON
-        return response()->json(['ultim0_valor_mercado' => $ultimaPrediccion]);
+        return response()->json($ultimaPrediccion);
     }
 
 
