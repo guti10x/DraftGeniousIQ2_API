@@ -11,7 +11,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\NotificacionesController;
 use App\Http\Controllers\PrediccionesPuntosController;
 use App\Http\Controllers\PrediccionesValorMercadoController;
-use App\Models\predicciones_valor_mercado;
+use App\Http\Controllers\AuthController;
 
 # EQUIPOS:
 Route::get('/equipos', [EquiposController::class, 'index']); // Obtener todos los equipos
@@ -82,6 +82,9 @@ Route::put('/usuarios/{id}/actualizar-password', [UsuariosController::class, 'up
 Route::put('/usuarios/{id}/actualizar-id-equipo', [UsuariosController::class, 'updateTeamId']); //Actualizar el ID del equipo del usuario
 Route::put('/usuarios/{id}/actualizar-rol', [UsuariosController::class, 'updateRole']); //Actualizar el rol del usuario
 Route::delete('/usuarios/{id}', [UsuariosController::class, 'destroy']); //Eliminar usuario por id
+
+#LOGIN
+Route::post('auth/login',[AuthController::class, 'login']); //Devolver token JWT pasándole como parámetro el email y contraseña
 
 #NOTIFICACIONES
 Route::get('/notificaciones', [NotificacionesController::class, 'index']); //Devolver todas las notificaciones almacenadas en la bd
