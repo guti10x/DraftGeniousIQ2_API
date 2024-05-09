@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificacionesController;
 use App\Http\Controllers\PrediccionesPuntosController;
 use App\Http\Controllers\PrediccionesValorMercadoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PartidoController;
 
 # EQUIPOS:
 Route::get('/equipos', [EquiposController::class, 'index']); // Obtener todos los equipos
@@ -121,3 +122,7 @@ Route::put('/pred_valor/{id_prediccion}/update_value', [PrediccionesValorMercado
 Route::delete('/pred_valor/{id_prediccion}', [PrediccionesValorMercadoController::class, 'destroy']);  // Eliminar predicción_de_valor_de_mercado por su id_predicción 
 Route::delete('/pred_valor/player/{id_player}/last', [PrediccionesValorMercadoController::class, 'deleteLastByPlayer']);  // Eliminar ultima predicción_de_valor_de_mercado asociada a un player 
 Route::delete('/pred_valor/player/{id_player}', [PrediccionesValorMercadoController::class, 'deleteByPlayer']);  // Eliminar todas las predicciones_de_valor_de_mercado asociadas a un player 
+
+#PARTIDOS DE LA LIGA
+Route::get('/partidos', [PartidoController::class, 'index']); // Devolver todos los partidos registrados en la bd
+Route::get('/partidos/last-jornada-matches', [PartidoController::class, 'lastJornadaPartidos']); //  Obtener todos los partidos de la última jornada registrada en la bd

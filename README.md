@@ -65,11 +65,12 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 
 ## USUARIOS:
 - `GET /usuarios`: Obtener todos los usuarios y datos asociados almacenados en la base de datos.
-- `POST /usuarios`: Registrar un nuevo usuario en la base de datos.
 - `GET /usuarios/{id}`: Devolver datos de un usuario buscado en la base de datos por su ID.
 - `GET /usuarios/nombre/{name}`: Devolver datos de un usuario buscado en la base de datos por su nombre.
 - `GET /usuarios/rol/1`: Obtener todos los usuarios con rol 1 (admin).
 - `GET /usuarios/rol/0`: Obtener todos los usuarios con rol 0 (user app).
+- `POST /usuarios`: Registrar un nuevo usuario en la base de datos.
+- `POST /auth/login`: Devolver token JWT pasándole como parámetro el email y contraseña.
 - `PUT /usuarios/{id}/actualizar-nombre`: Actualizar el nombre del usuario.
 - `PUT /usuarios/{id}/actualizar-email`: Actualizar el correo electrónico del usuario.
 - `PUT /usuarios/{id}/actualizar-password`: Actualizar la contraseña del usuario.
@@ -112,3 +113,7 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `DELETE /pred_valor/{id_prediccion}`: Eliminar una predicción de valor de mercado por su ID.
 - `DELETE /pred_valor/player/{id_player}/last`: Eliminar la última predicción de valor de mercado asociada a un jugador por su ID.
 - `DELETE /pred_valor/player/{id_player}`: Eliminar todas las predicciones de valor de mercado asociadas a un jugador por su ID.
+
+## Partidos de la Liga
+- `GET /partidos`: Devolver todos los partidos registrados en la base de datos.
+- `GET /partidos/last-jornada-matches`: Obtener todos los partidos de la última jornada registrada en la base de datos.
