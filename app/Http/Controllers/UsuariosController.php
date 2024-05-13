@@ -77,6 +77,32 @@ class UsuariosController extends Controller
         return response()->json(['usuarios' => $usuarios]);
     }
 
+    /**
+     * Obtener el correo electrónico asociado a un email de un usuario
+     * Ej: http://127.0.0.1:8000/api/user/role
+     * {
+     *     "email":"gt104515@gmail.com"
+     * }   
+    */
+    public function getRoleByEmail(Request $request)
+    {
+        // Validar el correo electrónico proporcionado
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Buscar al usuario por su correo electrónico
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            // Si se encuentra al usuario, devolver su rol
+            return response()->json($user->rol);
+        } else {
+            // Si no se encuentra al usuario, devolver un mensaje de error
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+    }
+
 
     /**
      * Registrar nuevo usuario en la bd 

@@ -23,6 +23,8 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `GET /estadisticas-equipos/{id}/stats`: Obtener todas las estadísticas asociadas a un ID de un equipo.
 - `GET /estadisticas-equipos/{id}/last-stats`: Obtener la última estadística asociada a un ID de un equipo.
 - `GET /equipos/{idEquipo}/money`: Devuelve el dinero disponible de un equipo en su cartera.
+- `GET /equipos/{equipo}/estadisticas`: Obtener todas las estadísticas asociadas a un equipo por su ID.
+- `GET /equipos/{equipo}/estadisticas/last-stats`: Obtener la última estadística asociada a un equipo por su ID.
 - `POST /estadisticas-equipos`: Crear una nueva estadística asociada a un equipo.
 - `PUT /estadisticas-equipos/{id}`: Actualizar el valor de todas las estadísticas de un equipo.
 - `PUT /estadisticas-equipos/{id}/id-equipo`: Actualizar el ID de equipo asociado a una estadística de un equipo.
@@ -31,8 +33,6 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `PUT /estadisticas-equipos/{id}/valor`: Actualizar el valor de un equipo.
 - `PUT /estadisticas-equipos/{id}/num-jugadores`: Actualizar el número de jugadores de un equipo.
 - `DELETE /estadisticas-equipos/{id_equipo}/all`: Eliminar todas las estadísticas asociadas a un equipo por su ID.
-- `GET /equipos/{equipo}/estadisticas`: Obtener todas las estadísticas asociadas a un equipo por su ID.
-- `GET /equipos/{equipo}/estadisticas/last-stats`: Obtener la última estadística asociada a un equipo por su ID.
 
 # DATOS DE JUGADORES:
 - `GET /jugadores`: Obtener todas las estadísticas globales de un jugador.
@@ -69,6 +69,7 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `GET /usuarios/nombre/{name}`: Devolver datos de un usuario buscado en la base de datos por su nombre.
 - `GET /usuarios/rol/1`: Obtener todos los usuarios con rol 1 (admin).
 - `GET /usuarios/rol/0`: Obtener todos los usuarios con rol 0 (user app).
+- `GET //user/role`: Obtener el correo electrónico asociado a un email de un usuario.
 - `POST /usuarios`: Registrar un nuevo usuario en la base de datos.
 - `POST /auth/login`: Devolver token JWT pasándole como parámetro el email y contraseña.
 - `PUT /usuarios/{id}/actualizar-nombre`: Actualizar el nombre del usuario.

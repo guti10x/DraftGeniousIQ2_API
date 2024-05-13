@@ -77,6 +77,7 @@ Route::get('/usuarios/{id}', [UsuariosController::class, 'showById']); // Devolv
 Route::get('/usuarios/nombre/{name}', [UsuariosController::class, 'showByName']); //Devolver datos de un usuarios buscado en la bd por su nombre
 Route::get('/usuarios/rol/1', [UsuariosController::class, 'getUsersWithRolOne']); //Obtener todos los usuarios con rol 1 (admin)
 Route::get('/usuarios/rol/0', [UsuariosController::class, 'getUsersWithRolZero']); //Obtener todos los usuarios con rol 0 (user app)
+Route::get('/user/role', [UsuariosController::class, 'getRoleByEmail']); // Obtener el correo electrónico asociado a un email de un usuario
 Route::put('/usuarios/{id}/actualizar-nombre', [UsuariosController::class, 'updateName']); // Actualizar el nombre del usuario
 Route::put('/usuarios/{id}/actualizar-email', [UsuariosController::class, 'updateEmail']); // Actualizar el correo electrónico del usuario
 Route::put('/usuarios/{id}/actualizar-password', [UsuariosController::class, 'updatePassword']); // Actualizar la contraseña del usuario
