@@ -129,6 +129,7 @@ Route::delete('/pred_valor/player/{id_player}', [PrediccionesValorMercadoControl
 #PARTIDOS DE LA LIGA
 Route::get('/partidos', [PartidoController::class, 'index']); // Devolver todos los partidos registrados en la bd
 Route::get('/partidos/last-jornada-matches', [PartidoController::class, 'lastJornadaPartidos']); //  Obtener todos los partidos de la última jornada registrada en la bd
+Route::get('/partidos/recent-match', [PartidoController::class, 'getRecentMatch']); //Obtener el último partido disputado
 
 #NOVEDADES/ACTUALIZACIONES DE LA APLICACIÓN
 Route::get('/novedades-recientes', [NovedadesAplicacionController::class, 'getRecentUpdates']); // Devuelve las 3 novedades más recientes.

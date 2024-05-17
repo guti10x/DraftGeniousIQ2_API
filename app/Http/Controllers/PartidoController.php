@@ -42,6 +42,21 @@ class PartidoController extends Controller
         }
     }
 
+    /**
+     * Devuelve el último partido disputado, priorizando el más reciente en caso de empate en la fecha de actualización, se selecciona el partido con el máximo número de goles en cualquiera de los equipos.
+     * GET /api/partidos/recent-match
+     */
+    public function getRecentMatch()
+    {
+        // Obtener el partido más reciente ordenado por updated_at y, en caso de empate,
+        // obtener el partido con el máximo número de goles en cualquiera de los equipos
+        $recentMatch = Partido::orderBy('updated_at', 'desc')
+                            ->orderByRaw('GREATEST(goles_local, goles_visitante) desc')
+                            ->first();
+
+        return response()->json($recentMatch);
+    }
+
 
     /**
      * Show the form for creating a new resource.
