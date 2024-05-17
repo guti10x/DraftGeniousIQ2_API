@@ -118,3 +118,9 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 ## Partidos de la Liga
 - `GET /partidos`: Devolver todos los partidos registrados en la base de datos.
 - `GET /partidos/last-jornada-matches`: Obtener todos los partidos de la última jornada registrada en la base de datos.
+
+## Novedades/Actualizaciones de la Aplicación
+- `GET /novedades-recientes`: Devuelve las 3 novedades más recientes.
+
+## Valoraciones de la Aplicación
+- `GET /valoraciones-recientes`: Devuelve las 3 valoraciones más recientes.
