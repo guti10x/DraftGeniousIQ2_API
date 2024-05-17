@@ -124,3 +124,4 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 
 ## Valoraciones de la Aplicación
 - `GET /valoraciones-recientes`: Devuelve las 3 valoraciones más recientes.
+- `POST /valoraciones`: Crea una nueva valoración.

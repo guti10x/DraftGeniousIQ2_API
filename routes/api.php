@@ -135,3 +135,4 @@ Route::get('/novedades-recientes', [NovedadesAplicacionController::class, 'getRe
 
 #VALORACIONES DE LA APLICACIÓN
 Route::get('/valoraciones-recientes', [ValoracionesAplicacionController::class, 'getRecentValoraciones']); // Devuelve las 3 valoraciones más recientes.
+Route::post('/valoraciones', [ValoracionesAplicacionController::class, 'store']); //Crear una nueva valoración
