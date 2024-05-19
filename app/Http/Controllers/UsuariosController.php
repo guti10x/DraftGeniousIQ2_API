@@ -16,7 +16,7 @@ class UsuariosController extends Controller
     public function index()
     {
         $usuarios = User::all();
-        return response()->json(['usuarios' => $usuarios]);
+        return response()->json($usuarios);
     }
     
     /**
@@ -35,6 +35,7 @@ class UsuariosController extends Controller
     /**
      * Buscar usuario por su NOMBRE y devolver todos los datos almacenados en la bd sobre el usuario encontrado
      * GET api/usuarios/{id_usuario_a_obtener_datos}
+     * EJ:http://127.0.0.1:8000/api/usuarios/nombre/guti10x_
     */
     public function showByName($name)
     {
@@ -45,6 +46,25 @@ class UsuariosController extends Controller
         if ($usuario) {
             // Devolver una respuesta JSON con el usuario encontrado
             return response()->json(['usuario' => $usuario]);
+        } else {
+            // Devolver una respuesta de error si no se encuentra el usuario
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+    }
+
+    /**
+     * Buscar usuario por su EMAIL y devolver su ID
+     * GET api/usuarios/{email_usuario_a_obtener_id}
+     */
+    public function getIdByEmail($email)
+    {
+        // Buscar el usuario por su email
+        $usuario = User::where('email', $email)->first();   
+
+        // Verificar si se encontró el usuario
+        if ($usuario) {
+            // Devolver el ID del usuario encontrado
+            return response()->json($usuario->id);
         } else {
             // Devolver una respuesta de error si no se encuentra el usuario
             return response()->json(['error' => 'Usuario no encontrado'], 404);
