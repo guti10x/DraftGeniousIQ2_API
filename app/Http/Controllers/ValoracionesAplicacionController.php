@@ -23,9 +23,11 @@ class ValoracionesAplicacionController extends Controller
 
     /**
      * Almacena una nueva valoración.
-     * GET http://127.0.0.1:8000/api/valoraciones
+     * POST http://127.0.0.1:8000/api/valoraciones
      * @param  \Illuminate\Http\Request  $request
      * ej:{
+     *     "id_usuario": 1,
+     *     "nombre_resenador": "Usuario Ejemplo",
      *     "titulo": "Excelente aplicación",
      *     "contenido": "Esta aplicación es increíble. Tiene muchas características útiles y funciona sin problemas. ¡La recomiendo totalmente!",
      *     "rating": 3
@@ -37,6 +39,8 @@ class ValoracionesAplicacionController extends Controller
     {
         // Validar los datos de la solicitud
         $request->validate([
+            'id_usuario' => 'required|integer',
+            'nombre_resenador' => 'required|string',
             'titulo' => 'required|string',
             'contenido' => 'required|string',
             'rating' => 'required|integer',
@@ -44,6 +48,8 @@ class ValoracionesAplicacionController extends Controller
 
         // Crear una nueva instancia de ValoracionesAplicacion
         $valoracion = new ValoracionesAplicacion();
+        $valoracion->id_usuario = $request->id_usuario;
+        $valoracion->nombre_resenador = $request->nombre_resenador;
         $valoracion->titulo = $request->titulo;
         $valoracion->contenido = $request->contenido;
         $valoracion->rating = $request->rating;

@@ -20,8 +20,11 @@ class ValoracionesAplicacion extends Model
 
     // Especifica los campos que se pueden asignar en masa
     protected $fillable = [
+        'id_usuario',
+        'nombre_resenador',
         'titulo',
         'contenido',
+        'rating',
         'created_at',
         'updated_at'
     ];
