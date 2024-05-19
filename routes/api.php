@@ -108,6 +108,7 @@ Route::delete('/notificaciones/type/{type}', [NotificacionesController::class, '
 Route::get('/pred_puntos', [PrediccionesPuntosController::class, 'index']); //Obtener todas las predicciones_de_puntos almacenadas en la bd
 Route::get('/pred_puntos/player/{id_player}', [PrediccionesPuntosController::class, 'getByPlayer']); //Obtener TODAS las predicciones_de_puntos asociadas a un player
 Route::get('/pred_puntos/player/{id_player}/last', [PrediccionesPuntosController::class, 'getLastByPlayer']); //Obtener LA ÚLTIMA predicción_de_puntos asociada a un player
+Route::get('/pred_puntos/top3', [PrediccionesPuntosController::class, 'getTop3Predicciones']);// Devuelve las 3 predicciones con el valor más alto.
 Route::post('/pred_puntos', [PrediccionesPuntosController::class, 'store']); // Almacenar nueva predicción_de_puntos asociada a un jugador
 Route::put('/pred_puntos/{id_prediccion}/update_player', [PrediccionesPuntosController::class, 'updatePlayer']);  // Modificar id_player asociado a la predicción_de_puntos por id de la predicción
 Route::put('/pred_puntos/{id_prediccion}/update_value', [PrediccionesPuntosController::class, 'updateValue']);  // Modificar valor de la predicción_de_puntos por id de la predicción

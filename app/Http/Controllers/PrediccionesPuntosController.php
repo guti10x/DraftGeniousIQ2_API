@@ -47,6 +47,19 @@ class PrediccionesPuntosController extends Controller
     }
 
     /*
+    *  Obtener las 3 predicción de puntos más altas almacenadas en la bd
+    *  GET api/pred_puntos/top3
+    */
+    public function getTop3Predicciones()
+    {
+        // Obtener las 3 filas con el valor más alto
+        $top3Predicciones = predicciones_puntos::orderBy('valor', 'desc')->take(3)->get();
+
+        // Retornar los resultados como una respuesta JSON
+        return response()->json($top3Predicciones);
+    }
+
+    /*
      * Almacenar nueva predicción_de_puntos asociada a un jugador
      * STORE api/pred_puntos
     */ 

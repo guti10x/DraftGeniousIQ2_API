@@ -108,6 +108,7 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `GET /pred_valor`: Obtener todas las predicciones de valor de mercado almacenadas en la base de datos.
 - `GET /pred_valor/player/{id_player}`: Obtener todas las predicciones de valor de mercado asociadas a un jugador por su ID.
 - `GET /pred_valor/player/{id_player}/last`: Obtener la última predicción de valor de mercado asociada a un jugador por su ID.
+- `GET /pred_puntos/top3`: Devuelve las 3 predicciones de puntos con el valor más alto.
 - `POST /pred_valor`: Almacenar una nueva predicción de valor de mercado asociada a un jugador.
 - `PUT /pred_valor/{id_prediccion}/update_player`: Modificar el ID de jugador asociado a una predicción de valor de mercado por su ID.
 - `PUT /pred_valor/{id_prediccion}/update_value`: Modificar el valor de una predicción de valor de mercado por su ID.
