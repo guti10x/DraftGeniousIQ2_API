@@ -68,6 +68,7 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 - `GET /usuarios/{id}`: Devolver datos de un usuario buscado en la base de datos por su ID.
 - `GET /usuarios/nombre/{name}`: Devolver datos de un usuario buscado en la base de datos por su nombre.
 - `GET /usuarios/email/{email}`: Obtener el id de un usuario pasándolo como parámetro su email.
+- `GET /usuarios/email_verified/{email}`: Obtener la comprobación de que un email ha sido verificado.
 - `GET /usuarios/rol/1`: Obtener todos los usuarios con rol 1 (admin).
 - `GET /usuarios/rol/0`: Obtener todos los usuarios con rol 0 (user app).
 - `GET //user/role`: Obtener el correo electrónico asociado a un email de un usuario.

@@ -78,6 +78,7 @@ Route::post('/usuarios', [UsuariosController::class, 'store']); //Registrar nuev
 Route::get('/usuarios/{id}', [UsuariosController::class, 'showById']); // Devolver datos de un usuarios buscado en la bd por su nombre
 Route::get('/usuarios/nombre/{name}', [UsuariosController::class, 'showByName']); //Devolver datos de un usuarios buscado en la bd por su nombre
 Route::get('/usuarios/email/{email}', [UsuariosController::class, 'getIdByEmail']); //Obtener el id de un usuario a partir de su email
+Route::get('/usuarios/email_verified/{email}', [UsuariosController::class, 'emailVerificado']); // Comprobar si el email pasado como parámetro ha sido verificado
 Route::get('/usuarios/rol/1', [UsuariosController::class, 'getUsersWithRolOne']); //Obtener todos los usuarios con rol 1 (admin)
 Route::get('/usuarios/rol/0', [UsuariosController::class, 'getUsersWithRolZero']); //Obtener todos los usuarios con rol 0 (user app)
 Route::get('/user/role', [UsuariosController::class, 'getRoleByEmail']); // Obtener el correo electrónico asociado a un email de un usuario

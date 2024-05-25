@@ -72,6 +72,26 @@ class UsuariosController extends Controller
     }
 
     /**
+     * Buscar usuario por su EMAIL y devolver su ID
+     * GET api/usuarios/{email_usuario_a_obtener_id}
+     * EJ: http://127.0.0.1:8000/api/usuarios/email_verified/gt104515@gmail.com
+     */
+    public function emailVerificado($email)
+    {
+        // Buscar el usuario por su email y seleccionar el campo email_verified
+        $usuario = User::where('email', $email)->first(['email_verified']);   
+    
+        // Verificar si se encontró el usuario
+        if ($usuario) {
+            // Devolver el valor de email_verified del usuario encontrado
+            return response()->json($usuario->email_verified);
+        } else {
+            // Devolver una respuesta de error si no se encuentra el usuario
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+    }
+
+    /**
      * Obtener todos los usuarios con rol 0 (user app)
      * GET api/usuarios/rol/0
     */
@@ -98,7 +118,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Obtener el correo electrónico asociado a un email de un usuario
+     * Obtener el rol asociado al email de un usuario
      * Ej: http://127.0.0.1:8000/api/user/role
      * {
      *     "email":"gt104515@gmail.com"
