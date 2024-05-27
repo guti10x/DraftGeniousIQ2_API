@@ -25,7 +25,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'rol',
-        'id_team'
+        'id_team',
+        'email_verified'
     ];
 
     public function getJWTIdentifier()
@@ -57,7 +58,6 @@ class User extends Authenticatable implements JWTSubject
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }

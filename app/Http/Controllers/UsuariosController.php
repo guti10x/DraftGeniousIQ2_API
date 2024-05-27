@@ -182,6 +182,7 @@ class UsuariosController extends Controller
             'password' => bcrypt($request->password),
             'rol' => $request->rol,
             'id_team' => $request->id_team,
+            'email_verified' => 0,
         ]);
     
         // Devolver una respuesta JSON con el usuario creado y el código de estado 201 (created)
