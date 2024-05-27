@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\JWTMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Definir los Middlewares:
         $middleware->alias([
             'checkJWTMiddleware' => JWTMiddleware :: class,
+            'checkADMINMiddleware' => AdminMiddleware :: class,
         ]);
         //$middleware->api(\App\Http\Middleware\JWTMiddleware::class);
     })
