@@ -83,21 +83,21 @@ Route::middleware(['checkJWTMiddleware'])->group(function () {
 
 #USERS
 Route::get('/usuarios', [UsuariosController::class, 'index']); //->middleware('checkADMINMiddleware'); //Obtener todos los usuarios y datos asociados a estos almacenados en la base de datos
-Route::get('/usuarios/email/{email}', [UsuariosController::class, 'getIdByEmail']); //Obtener el id de un usuario a partir de su email
+Route::get('/usuario/email/{email}', [UsuariosController::class, 'getIdByEmail']); //Obtener el id de un usuario a partir de su email
 Route::get('/usuarios/email_verified/{email}', [UsuariosController::class, 'emailVerificado']); // Comprobar si el email pasado como parámetro ha sido verificado
 Route::get('/user/role', [UsuariosController::class, 'getRoleByEmail']); // Obtener el correo electrónico asociado a un email de un usuario
-Route::middleware(['checkJWTMiddleware','checkADMINMiddleware'])->group(function () {
-    Route::post('/usuarios', [UsuariosController::class, 'store']); //Registrar nuevo usuario en la bd 
+Route::middleware(['checkJWTMiddleware'])->group(function () {
+    Route::post('/usuarios', [UsuariosController::class, 'store'])->middleware('checkADMINMiddleware'); //Registrar nuevo usuario en la bd 
     Route::get('/usuarios/{id}', [UsuariosController::class, 'showById']); // Devolver datos de un usuarios buscado en la bd por su nombre
-    Route::get('/usuarios/nombre/{name}', [UsuariosController::class, 'showByName']); //Devolver datos de un usuarios buscado en la bd por su nombre
+    Route::get('/usuarios/email/{email}', [UsuariosController::class, 'showByName']); //Devolver datos de un usuarios buscado en la bd por su email
     Route::get('/usuarios/rol/1', [UsuariosController::class, 'getUsersWithRolOne']); //Obtener todos los usuarios con rol 1 (admin)
     Route::get('/usuarios/rol/0', [UsuariosController::class, 'getUsersWithRolZero']); //Obtener todos los usuarios con rol 0 (user app)
     Route::put('/usuarios/{id}/actualizar-nombre', [UsuariosController::class, 'updateName']); // Actualizar el nombre del usuario
     Route::put('/usuarios/{id}/actualizar-email', [UsuariosController::class, 'updateEmail']); // Actualizar el correo electrónico del usuario
     Route::put('/usuarios/{id}/actualizar-password', [UsuariosController::class, 'updatePassword']); // Actualizar la contraseña del usuario
-    Route::put('/usuarios/{id}/actualizar-id-equipo', [UsuariosController::class, 'updateTeamId']); //Actualizar el ID del equipo del usuario
-    Route::put('/usuarios/{id}/actualizar-rol', [UsuariosController::class, 'updateRole']); //Actualizar el rol del usuario
-    Route::delete('/usuarios/{id}', [UsuariosController::class, 'destroy']); //Eliminar usuario por id
+    Route::put('/usuarios/{id}/actualizar-id-equipo', [UsuariosController::class, 'updateTeamId'])->middleware('checkADMINMiddleware');; //Actualizar el ID del equipo del usuario
+    Route::put('/usuarios/{id}/actualizar-rol', [UsuariosController::class, 'updateRole'])->middleware('checkADMINMiddleware'); //Actualizar el rol del usuario
+    Route::delete('/usuarios/{id}', [UsuariosController::class, 'destroy'])->middleware('checkADMINMiddleware');//Eliminar usuario por id
 });
 
 #LOGIN
