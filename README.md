@@ -7,9 +7,70 @@ Con esta API, puedes realizar operaciones como obtener información sobre equipo
 ## Desarrolados con:
 <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo">
 
-# Endpoints de la API:
+## Pasos de Instalación
 
-## - DATOS DE EQUIPOS:
+0. Asegúrate de tener PHP y Composer instalados en tu sistema.
+
+1. Abre tu terminal o línea de comandos.
+
+2. Descarga el repositorio del proyecto ejecutando el siguiente comando:
+
+    ```bash
+    git clone https://github.com/guti10x/DraftGeniousIQ2_API.git
+    ```
+
+3. Navega al directorio del proyecto:
+
+    ```bash
+    cd DraftGeniousIQ2_API
+    ```
+
+4. Instala las dependencias de Composer:
+
+    ```bash
+    composer install
+    ```
+
+5. Crear y configurar el archivo de entorno:
+
+    - En la raíz del proyecto, encontrarás un archivo llamado `environment.txt`. Este archivo contiene una lista de las variables de entorno necesarias para el proyecto.
+    - Abre el archivo `environment.txt` en un editor de texto y rellénalo con tus propias configuraciones. A continuación, se muestra un ejemplo de cómo debería verse el archivo:
+
+        ##### Configuración de la base de datos
+        ```plaintext
+        DB_HOST=tu_host_de_base_de_datos
+        DB_USER=tu_usuario_de_base_de_datos
+        DB_PASSWORD=tu_contraseña_de_base_de_datos
+        DB_NAME=nombre_de_tu_base_de_datos
+        ```
+
+        ##### Configuración del servidor
+        ```plaintext
+        SERVER_PORT=puerto_del_servidor
+        ```
+
+        ##### Otras configuraciones
+        ```plaintext
+        API_KEY=tu_clave_de_api
+        ```
+
+6. Ejecuta las migraciones de la base de datos para crear las tablas necesarias:
+
+    ```bash
+    php artisan migrate
+    ```
+
+## Ejecución de la API
+
+Después de haber seguido los pasos anteriores, la API debería estar configurado y listo para ejecutarse. Utiliza el siguiente comando para iniciar el servidor:
+
+```bash
+php artisan serve
+```
+
+## Endpoints de la API:
+
+### - DATOS DE EQUIPOS:
 - `GET /equipos`: Obtener todos los equipos.
 - `GET /equipos/{equipo}`: Obtener el nombre de un equipo por su ID.
 - `GET /equipos/id/{nombre}`: Obtener el ID de un equipo por su nombre.
